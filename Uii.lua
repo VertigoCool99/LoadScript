@@ -2631,6 +2631,9 @@ function Library:Notify(Text, Time)
         local tween = game:GetService("TweenService"):Create(Number,TweenInfo.new(.1, Enum.EasingStyle.Linear),{Value = drawings.backbox.Position.X+(drawings.backbox.Position.X*drawings.backbox.Size.X)})
         tween:Play()
         Number:GetPropertyChangedSignal("Value"):Connect(function()
+	    drawings.backbox.Color = Library.BackgroundColor
+	    drawings.backbox.Color = Library.AccentColor
+	    drawings.text.Color = Library.FontColor
             drawings.backbox.Position = Vector2.new(drawings.backbox.Position.X-Number.Value,drawings.backbox.Position.Y)
             drawings.boxout.Position = Vector2.new(drawings.boxout.Position.X-Number.Value,drawings.boxout.Position.Y)
             drawings.text.Position = Vector2.new(drawings.text.Position.X-Number.Value,drawings.text.Position.Y)
