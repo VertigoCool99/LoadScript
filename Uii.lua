@@ -2624,7 +2624,10 @@ function Library:Notify(Text, Time)
     drawings.backbox.Visible = true
     drawings.boxout.Visible = true
     drawings.text.Visible = true
-    
+    drawings.backbox.Color = Library.BackgroundColor
+    drawings.backbox.Color = Library.AccentColor
+    drawings.text.Color = Library.FontColor
+	
     task.spawn(function()
         task.wait(Time)
         local Number = Instance.new("NumberValue",game:GetService("CoreGui"));Number.Value = drawings.backbox.Position.X
