@@ -2607,7 +2607,7 @@ end;
 
 function Library:Notify(Text, Time)
     local drawings = {}
-    table.insert(Notifications,NotiText)
+    table.insert(Notifications,Text)
     drawings.backbox = draw("Square",{Thickness=1,Filled=true,Color = Library.BackgroundColor,ZIndex = -10})
     drawings.boxout = draw("Square",{Thickness=1,Filled=false,Color = Library.AccentColor,ZIndex = -9})
     drawings.text = draw("Text",{Text ="",Font=2,Size=13,Center=false,Outline=false,Color = Library.FontColor,ZIndex = -9})
@@ -2636,7 +2636,7 @@ function Library:Notify(Text, Time)
             drawings.text.Position = Vector2.new(drawings.text.Position.X-Number.Value,drawings.text.Position.Y)
         end)
         tween.Completed:Connect(function()
-            table.remove(Notifications,GetIndexTable(NotiText))
+            table.remove(Notifications,GetIndexTable(Text))
             Number:Destroy()
             for i,v in pairs(drawings) do
                v:Remove() 
