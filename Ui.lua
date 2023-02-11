@@ -7,6 +7,25 @@ local RunService = game:GetService('RunService')
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
+local camera = game:GetService("Workspace").CurrentCamera
+
+local Notifications = {}
+
+function draw(type,propities)
+    local new = Drawing.new(type)
+	for i,v in pairs(propities) do
+		new[i] = v
+	end
+	return new
+end
+
+function GetIndexTable(Text)
+    for i,v in next, Notifications do
+        if v == Text then
+            return i 
+        end
+    end
+end
 
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
 
