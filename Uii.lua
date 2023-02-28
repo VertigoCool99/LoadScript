@@ -2625,7 +2625,7 @@ function Library:Notify(Text, Time)
     drawings.boxout.Visible = true
     drawings.text.Visible = true
     drawings.backbox.Color = Library.BackgroundColor
-    drawings.backbox.Color = Library.AccentColor
+    drawings.boxout.Color = Library.AccentColor
     drawings.text.Color = Library.FontColor
 	
     task.spawn(function()
