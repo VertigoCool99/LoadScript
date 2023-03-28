@@ -110,7 +110,7 @@ function Library:SafeCallback(f, ...)
         local _, i = event:find(":%d+: ");
 
         if not i then
-            return Library:Notify(event);
+            return Library:Notify(event,2);
         end;
 
         return Library:Notify(event:sub(i + 1), 3);
@@ -2602,7 +2602,9 @@ function Library:SetWatermark(Text)
     Library.Watermark.Size = UDim2.new(0, X + 15, 0, (Y * 1.5) + 3);
     Library:SetWatermarkVisibility(true)
 
-    Library.WatermarkText.Text = Text;
+    game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
+        Library.WatermarkText.Text = Text.." | Fps: "..math.round(1 / deltaTime).." | "..tostring(os.date());
+    end)
 end;
 
 function Library:Notify(Text, Time)
