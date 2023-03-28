@@ -2604,7 +2604,7 @@ function Library:SetWatermark(Text)
 
     game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
         local X, Y = Library:GetTextBounds(Text, Library.Font, 14);
-        Library.WatermarkText.Text = Text.." | Fps: "..math.round(1 / deltaTime).." | "..tostring(os.date());
+        Library.WatermarkText.Text = Text.." | Fps: "..math.round(1 / deltaTime).." | "..tostring(os.date("%Y").." "..os.date("%b").." "..os.date("%a").." : "..tonumber(os.date("%I"))..":"..os.date("%M")..":"..os.date("%S").." "..os.date("%p"));
         Library.Watermark.Size = UDim2.new(0, X + 15, 0, (Y * 1.5) + 3);
     end)
 end;
