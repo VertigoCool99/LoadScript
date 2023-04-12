@@ -2600,11 +2600,17 @@ function Library:SetWatermark(Text)
     local X, Y = Library:GetTextBounds(Text, Library.Font, 14);
     Library.Watermark.Size = UDim2.new(0, Library.WatermarkText.TextBounds.X + 15, 0, (Y * 1.5) + 3);
     Library:SetWatermarkVisibility(true)
+	local fps = 60
+	task.spawn(function() 
+		while true do task.wait(.5)
+			Library.WatermarkText.Text = Text.." | Fps: "..math.round(fps).." | "..tostring(os.date("%Y").." "..os.date("%b").." "..os.date("%a").." "..tonumber(os.date("%I"))..":"..os.date("%M")..":"..os.date("%S").." "..os.date("%p"));
+			local X, Y = Library:GetTextBounds(Library.WatermarkText.Text, Library.Font, 14);
+			Library.Watermark.Size = UDim2.new(0, X + 15, 0, (Y * 1.5) + 3);
+		end
+	end)
 
     game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
-        Library.WatermarkText.Text = Text.." | Fps: "..math.round(1 / deltaTime).." | "..tostring(os.date("%Y").." "..os.date("%b").." "..os.date("%a").." "..tonumber(os.date("%I"))..":"..os.date("%M")..":"..os.date("%S").." "..os.date("%p"));
-        local X, Y = Library:GetTextBounds(Library.WatermarkText.Text, Library.Font, 14);
-	Library.Watermark.Size = UDim2.new(0, X + 15, 0, (Y * 1.5) + 3);
+		fps = (1 / deltaTime)
     end)
 end;
 
