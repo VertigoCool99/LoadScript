@@ -16,6 +16,7 @@ function draw(type,propities)
 	for i,v in pairs(propities) do
 		new[i] = v
 	end
+	return new
 end
 
 function GetIndexTable(Text)
@@ -2618,7 +2619,7 @@ function Library:Notify(NotiText, Time)
     table.insert(Notifications,NotiText)
     local backbox,boxout,text = draw("Square",{Thickness=1,Filled=true,Color = Library.BackgroundColor,ZIndex = -10}),draw("Square",{Thickness=1,Filled=false,Color = Library.AccentColor,ZIndex = -9}),draw("Text",{Text ="",Font=2,Size=13,Center=false,Outline=false,Color = Library.FontColor,ZIndex = -9,Text=NotiText})
     
-    --backbox.Position = Vector2.new(camera.ViewportSize.X / camera.ViewportSize.X,camera.ViewportSize.Y / 8)
+    backbox.Position = Vector2.new(camera.ViewportSize.X / camera.ViewportSize.X,camera.ViewportSize.Y / 8)
     backbox.Position = Vector2.new(backbox.Position.X,backbox.Position.Y+#Notifications*backbox.Size.Y*1.75)
     boxout.Position = Vector2.new(backbox.Position.X+2,backbox.Position.Y+2)
     text.Position = Vector2.new(boxout.Position.X+4,boxout.Position.Y+4)
