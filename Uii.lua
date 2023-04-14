@@ -2614,48 +2614,43 @@ function Library:SetWatermark(Text)
     end)
 end;
 
-function Library:Notify(Text, Time)
-    local drawings = {}
-    table.insert(Notifications,Text)
-    drawings.backbox = draw("Square",{Thickness=1,Filled=true,Color = Library.BackgroundColor,ZIndex = -10})
-    drawings.boxout = draw("Square",{Thickness=1,Filled=false,Color = Library.AccentColor,ZIndex = -9})
-    drawings.text = draw("Text",{Text ="",Font=2,Size=13,Center=false,Outline=false,Color = Library.FontColor,ZIndex = -9})
+function Library:Notify(NotiText, Time)
+    table.insert(Notifications,NotiText)
+    local backbox,boxout,text = draw("Square",{Text=NotiText,Thickness=1,Filled=true,Color = Library.BackgroundColor,ZIndex = -10}),draw("Square",{Thickness=1,Filled=false,Color = Library.AccentColor,ZIndex = -9}),draw("Text",{Text ="",Font=2,Size=13,Center=false,Outline=false,Color = Library.FontColor,ZIndex = -9})
     
-    drawings.backbox.Position = Vector2.new(camera.ViewportSize.X / camera.ViewportSize.X,camera.ViewportSize.Y / 8)
-    drawings.backbox.Position = Vector2.new(drawings.backbox.Position.X,drawings.backbox.Position.Y+#Notifications*drawings.backbox.Size.Y*1.75)
-    drawings.boxout.Position = Vector2.new(drawings.backbox.Position.X+2,drawings.backbox.Position.Y+2)
-    drawings.text.Position = Vector2.new(drawings.boxout.Position.X+4,drawings.boxout.Position.Y+4)
-    drawings.text.Text = Text
+    backbox.Position = Vector2.new(camera.ViewportSize.X / camera.ViewportSize.X,camera.ViewportSize.Y / 8)
+    backbox.Position = Vector2.new(backbox.Position.X,backbox.Position.Y+#Notifications*backbox.Size.Y*1.75)
+    boxout.Position = Vector2.new(backbox.Position.X+2,backbox.Position.Y+2)
+    text.Position = Vector2.new(boxout.Position.X+4,boxout.Position.Y+4)
     
-    drawings.backbox.Size = Vector2.new(drawings.text.TextBounds.X+drawings.text.TextBounds.Y,26)
-    drawings.boxout.Size = Vector2.new(drawings.backbox.Size.X-4,drawings.backbox.Size.Y-4)
+    backbox.Size = Vector2.new(text.TextBounds.X+text.TextBounds.Y,26)
+    boxout.Size = Vector2.new(backbox.Size.X-4,backbox.Size.Y-4)
     
-    drawings.backbox.Visible = true
-    drawings.boxout.Visible = true
-    drawings.text.Visible = true
-    drawings.backbox.Color = Library.BackgroundColor
-    drawings.boxout.Color = Library.AccentColor
-    drawings.text.Color = Library.FontColor
+    backbox.Visible = true
+    boxout.Visible = true
+    text.Visible = true
+    backbox.Color = Library.BackgroundColor
+    boxout.Color = Library.AccentColor
+    text.Color = Library.FontColor
 	
     task.spawn(function()
         task.wait(Time)
-        local Number = Instance.new("NumberValue",game:GetService("CoreGui"));Number.Value = drawings.backbox.Position.X
-        local tween = game:GetService("TweenService"):Create(Number,TweenInfo.new(.1, Enum.EasingStyle.Linear),{Value = drawings.backbox.Position.X+(drawings.backbox.Position.X*drawings.backbox.Size.X)})
+        local Number = Instance.new("NumberValue",game:GetService("CoreGui"));Number.Value = backbox.Position.X
+        local tween = game:GetService("TweenService"):Create(Number,TweenInfo.new(.1, Enum.EasingStyle.Linear),{Value = backbox.Position.X+(backbox.Position.X*backbox.Size.X)})
         tween:Play()
         Number:GetPropertyChangedSignal("Value"):Connect(function()
-	    drawings.backbox.Color = Library.BackgroundColor
-	    drawings.backbox.Color = Library.AccentColor
-	    drawings.text.Color = Library.FontColor
-            drawings.backbox.Position = Vector2.new(drawings.backbox.Position.X-Number.Value,drawings.backbox.Position.Y)
-            drawings.boxout.Position = Vector2.new(drawings.boxout.Position.X-Number.Value,drawings.boxout.Position.Y)
-            drawings.text.Position = Vector2.new(drawings.text.Position.X-Number.Value,drawings.text.Position.Y)
+	        backbox.Color = Library.AccentColor
+	        text.Color = Library.FontColor
+            backbox.Position = Vector2.new(backbox.Position.X-Number.Value,backbox.Position.Y)
+            boxout.Position = Vector2.new(boxout.Position.X-Number.Value,boxout.Position.Y)
+            text.Position = Vector2.new(text.Position.X-Number.Value,text.Position.Y)
         end)
         tween.Completed:Connect(function()
-            table.remove(Notifications,GetIndexTable(Text))
+            table.remove(Notifications,GetIndexTable(NotiText))
             Number:Destroy()
-            for i,v in pairs(drawings) do
-               v:Remove() 
-            end
+            backbox:Remove()
+            boxout:Remove()
+            text:Remove()
         end)
     end)
 end;
