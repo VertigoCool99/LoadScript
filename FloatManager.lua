@@ -5,7 +5,7 @@ local ThemeManager = {} do
 
 	ThemeManager.Library = nil
 	ThemeManager.BuiltInThemes = {
-        ['Project Vertigo'] = { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"15151b","AccentColor":"ff004c","BackgroundColor":"111117","OutlineColor":"1a1a20"}') },
+        	['Float'] = { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"15151b","AccentColor":"03A9F4","BackgroundColor":"111117","OutlineColor":"1a1a20"}') },
 		['Default'] 		= { 2, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1c1c1c","AccentColor":"0055ff","BackgroundColor":"141414","OutlineColor":"323232"}') },
 		['Green'] 			= { 4, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"141414","AccentColor":"00ff8b","BackgroundColor":"1c1c1c","OutlineColor":"3c3c3c"}') },
 		['Jester'] 			= { 5, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"242424","AccentColor":"db4467","BackgroundColor":"1c1c1c","OutlineColor":"373737"}') },
