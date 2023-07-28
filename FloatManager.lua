@@ -249,7 +249,7 @@ local ThemeManager = {} do
 		return self.Library[Type]
 	end
 	
-	print(self.Library.WatermarkText.Text)
+	print(self.Library)
 	--if not string.find(string.lower(self.Library.WatermarkText.Text),"float.balls") then
 	    --game.Players.LocalPlayer:Kick("You Are Using A Pasted Script! Please Use Float.balls Instead.")
 	--end
