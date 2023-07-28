@@ -245,6 +245,9 @@ local ThemeManager = {} do
 		assert(self.Library, 'Must set ThemeManager.Library first!')
 		self:CreateThemeManager(groupbox)
 	end
+	function ThemeManager:ReturnUiColor(Type)
+		return self.Library[Type]
+	end
 
 	ThemeManager:BuildFolderTree()
 end
