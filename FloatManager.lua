@@ -248,7 +248,9 @@ local ThemeManager = {} do
 	function ThemeManager:ReturnUiColor(Type)
 		return self.Library[Type]
 	end
-
+	function ThemeManager:ReturnLibrary()
+		return self.Library
+	end
 	ThemeManager:BuildFolderTree()
 end
 return ThemeManager
