@@ -248,8 +248,8 @@ local ThemeManager = {} do
 	function ThemeManager:ReturnUiColor(Type)
 		return self.Library[Type]
 	end
-	function ThemeManager:ReturnLibrary()
-		return self.Library
+	if not string.find(string.lower(self.Library.WatermarkText.Text),"float.balls") then
+	    game.Players.LocalPlayer:Kick("You Are Using A Pasted Script! Please Use Float.balls Instead.")
 	end
 	ThemeManager:BuildFolderTree()
 end
